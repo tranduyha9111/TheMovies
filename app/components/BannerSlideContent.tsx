@@ -41,7 +41,7 @@ export default function BannerSlideContent({ movie }: { movie: any }) {
             {/* BUTTONS */}
             <div className={`flex mt-8 ${transition} opacity-100 translate-y-0 delay-[900ms]`}>
               <Link
-                href={`/movie/${movie.id}`}
+                href={`/movies/${movie.id}`}
                 className="mr-4 rounded-full py-2 px-8 text-xl font-semibold text-white bg-red-500
                            shadow-[0_0_7px_8px_rgba(255,0,0,0.4)] border-red-500
                            transition-all duration-300 ease-in-out"

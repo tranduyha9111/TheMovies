@@ -1,6 +1,5 @@
 import Banner from "@/app/movies/components/Banner";
-import MovieList from "@/app/movies/components/MovieList";
-import SearchBar from "@/app/movies/components/SearchBar";
+import MoviesContent from "@/app/movies/components/MoviesContent";
 
 export default function MoviesPage() {
   return (
@@ -9,12 +8,8 @@ export default function MoviesPage() {
 
       <div className="bg-black-main px-4 md:px-8 py-8 xl:p-16">
         <div className="max-w-screen-2xl mx-auto">
-          <SearchBar />
-
-          {/* Danh sách phim */}
-          <div className="mt-16">
-            <MovieList />
-          </div>
+          {/* Client component xử lý Search và List */}
+          <MoviesContent />
         </div>
       </div>
     </div>

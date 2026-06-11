@@ -29,7 +29,11 @@ export default function MoviePage() {
         <MovieTrailer movie={movie} />
       </div>
       <div className="px-4 md:px-8 lg:px-16 pb-16">
-        <MovieRow title="Similar" />
+        <MovieRow 
+          title="Similar Movies" 
+          endpoint={`/movie/${movieId}/similar`} 
+          type="movie" 
+        />
       </div>
     </div>
   );

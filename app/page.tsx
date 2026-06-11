@@ -6,10 +6,26 @@ export default function Home() {
     <main>
       <BannerSlider />
 
-      <MovieRow title="Trending Movies" />
-      <MovieRow title="Top Rated Movies" />
-      <MovieRow title="Trending TV" />
-      <MovieRow title="Top Rated TV" />
+      <MovieRow 
+        title="Trending Movies" 
+        endpoint="/trending/movie/day" 
+        type="movie" 
+      />
+      <MovieRow 
+        title="Top Rated Movies" 
+        endpoint="/movie/top_rated" 
+        type="movie" 
+      />
+      <MovieRow 
+        title="Trending TV" 
+        endpoint="/trending/tv/day" 
+        type="tv" 
+      />
+      <MovieRow 
+        title="Top Rated TV" 
+        endpoint="/tv/top_rated" 
+        type="tv" 
+      />
     </main>
   );
 }

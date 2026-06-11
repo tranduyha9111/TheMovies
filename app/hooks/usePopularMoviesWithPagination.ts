@@ -1,40 +1,49 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-export function usePopularMoviesWithPagination() {
+const API_KEY = "4f85134e0e3de33d9af45eb9596b5735";
+
+export function usePopularMoviesWithPagination(type: "movie" | "tv" = "movie") {
   const [movies, setMovies] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const apiKey = "4f85134e0e3de33d9af45eb9596b5735";
 
-  // Load page đầu tiên
-  useEffect(() => {
-    fetchMovies(page);
-  }, []);
+  const endpoint =
+    type === "tv" ? "/tv/popular" : "/movie/popular";
 
-  const fetchMovies = async (pageNumber: number) => {
-    setLoadingMore(true);
+  const fetchMovies = useCallback(
+    async (pageNumber: number) => {
+      setLoadingMore(true);
 
-    try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${pageNumber}`
-      );
-      const data = await res.json();
-
-      // 🔹 Lọc movie trùng trước khi append
-      setMovies((prev) => {
-        const newMovies = data.results.filter(
-          (m: any) => !prev.some((p) => p.id === m.id)
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3${endpoint}?api_key=${API_KEY}&page=${pageNumber}`
         );
-        return [...prev, ...newMovies];
-      });
-    } catch (error) {
-      console.error("Failed to fetch movies:", error);
-    } finally {
-      setLoadingMore(false);
-    }
-  };
+        const data = await res.json();
+
+        // Lọc movie trùng trước khi append
+        setMovies((prev) => {
+          const newMovies = data.results.filter(
+            (m: any) => !prev.some((p) => p.id === m.id)
+          );
+          return [...prev, ...newMovies];
+        });
+      } catch (error) {
+        console.error("Failed to fetch:", error);
+      } finally {
+        setLoadingMore(false);
+      }
+    },
+    [endpoint]
+  );
+
+  // Reset và load page đầu tiên khi type thay đổi
+  useEffect(() => {
+    setMovies([]);
+    setPage(1);
+    fetchMovies(1);
+  }, [fetchMovies]);
 
   const loadMore = () => {
     const nextPage = page + 1;

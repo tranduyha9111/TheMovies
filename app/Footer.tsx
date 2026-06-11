@@ -11,12 +11,12 @@ export default function Footer() {
     "You must watch",
     "Contact us",
     "FAQ",
-    "Recent realease",
+    "Recent release",
     "Term of services",
     "Premium",
     "Top IMDB",
     "About us",
-    "Pravacy policy",
+    "Privacy policy",
   ];
 
   const linkClass =
@@ -37,7 +37,7 @@ export default function Footer() {
           href="/"
         >
           <Image className="mr-2 md:mr-4 w-8 md:w-12" src={logo} alt="logo" />
-          <h1 className="text-white font-semibold text-2xl md:text-4xl group-hover:text-red-main transition-custom duration-300">
+          <h1 className="text-white font-semibold text-2xl md:text-4xl group-hover:text-red-500 transition-all duration-300">
             theMovies
           </h1>
         </Link>

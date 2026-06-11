@@ -4,8 +4,19 @@ import { memo, useMemo } from "react";
 import Link from "next/link";
 import { Play } from "lucide-react";
 
-function MovieCard({ movie }: { movie: any }) {
-  // Tối ưu: chỉ tính poster 1 lần → tránh re-render không cần thiết
+interface MovieCardProps {
+  movie: any;
+  type?: "movie" | "tv";
+}
+
+function MovieCard({ movie, type = "movie" }: MovieCardProps) {
+  // TV series dùng 'name', movies dùng 'title'
+  const title = type === "tv"
+    ? (movie?.name ?? movie?.title ?? "Unknown")
+    : (movie?.title ?? movie?.name ?? "Unknown Title");
+
+  const href = type === "tv" ? `/tvSeries/${movie.id}` : `/movies/${movie.id}`;
+
   const poster = useMemo(
     () =>
       movie?.poster_path
@@ -14,11 +25,8 @@ function MovieCard({ movie }: { movie: any }) {
     [movie?.poster_path]
   );
 
-  // Tối ưu: fallback title để tránh lỗi khi movie.title undefined
-  const title = movie?.title || "Unknown Title";
-
   return (
-    <Link href={`/movies/${movie.id}`} className="hover:cursor-pointer group/container">
+    <Link href={href} className="hover:cursor-pointer group/container">
       {/* POSTER */}
       <div
         className="

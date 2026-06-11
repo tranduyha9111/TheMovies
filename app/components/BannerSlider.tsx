@@ -27,7 +27,7 @@ export default function BannerSlider() {
         }}
         className="hero-banner-swiper w-full h-full"
       >
-        {movies.map((movie) => (
+        {movies.map((movie: any) => (
           <SwiperSlide key={movie.id}>
             <BannerSlideContent movie={movie} />
           </SwiperSlide>

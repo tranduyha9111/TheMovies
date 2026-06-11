@@ -2,15 +2,23 @@
 
 import Link from "next/link";
 
-export default function MovieCard({ movie }) {
-  const { id, title, poster_path } = movie;
+interface MovieCardProps {
+  movie: any;
+  type?: "movie" | "tv";
+}
+
+export default function MovieCard({ movie, type = "movie" }: MovieCardProps) {
+  // TV series dùng 'name', movies dùng 'title'
+  const title = type === "tv" ? (movie.name ?? movie.title) : (movie.title ?? movie.name);
+  const { id, poster_path } = movie;
   const posterUrl = poster_path
     ? `https://image.tmdb.org/t/p/w300${poster_path}`
-    : "/no-poster.png"; // fallback để không bị vỡ UI
+    : "/no-poster.png";
+  const href = type === "tv" ? `/tvSeries/${id}` : `/movies/${id}`;
 
   return (
     <Link
-      href={`/movies/${id}`}
+      href={href}
       className="block group w-full h-full relative overflow-hidden rounded-xl"
     >
       <div className="w-[180px] h-[270px] md:w-[220px] md:h-[330px] relative overflow-hidden rounded-xl">
