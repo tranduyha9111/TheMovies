@@ -16,7 +16,7 @@ export default function BannerSlideContent({ movie }: { movie: any }) {
                    after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-28
                    after:bg-gradient-to-t after:from-black/100 after:to-transparent"
         style={{ backgroundImage: `url(${bgImage})` }}
-      >
+      > 
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
 
         <div className="justify-between items-center max-w-screen-2xl h-fit flex z-10 w-full">
